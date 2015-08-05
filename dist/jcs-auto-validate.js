@@ -1231,11 +1231,13 @@
         'validationManager'
     ];
 
-    function ProviderFn($provide) {
-        $provide.decorator('ngSubmitDirective', SubmitDecorator);
-    }
+    angular.module('jcs-autoValidate').config(['$provide',
+        function ProviderFn($provide) {
+            $provide.decorator('ngSubmitDirective', SubmitDecorator);
+        }
+    ]);
 
-    angular.module('jcs-autoValidate').config(['$provide', ProviderFn]);
+
 }(angular));
 
 (function (angular) {
