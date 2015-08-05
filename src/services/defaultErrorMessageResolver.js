@@ -168,6 +168,10 @@
                                 errMsg = angular.autoValidate.errorMessages[currentCulture][messageTypeOverride];
                             }
 
+                            if (errorType === "api") {
+                                errMsg = el.scope().errors[el.attr("name")];
+                            }
+
                             if (errMsg === undefined) {
                                 errMsg = angular.autoValidate.errorMessages[currentCulture].defaultMsg.format(errorType);
                             }
