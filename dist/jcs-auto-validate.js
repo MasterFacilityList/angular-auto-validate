@@ -1,5 +1,5 @@
 /*
- * angular-auto-validate - v1.18.10 - 2015-08-03
+ * angular-auto-validate - v1.18.10 - 2015-08-05
  * https://github.com/jonsamwell/angular-auto-validate
  * Copyright (c) 2015 Jon Samwell (http://www.jonsamwell.com)
  */
@@ -431,9 +431,16 @@
                      */
                     makeInvalid = function (el, errorMsg) {
                         var frmGroupEl = findFormGroupElement(el),
-                            helpTextEl = angular.element('<span class="help-block has-error error-msg">' + errorMsg + '</span>'),
+                            helpTextEl,
                             inputGroupEl;
-
+                        if (angular.isArray(errorMsg)) {
+                            var html = _.reduce(errorMsg, function (a, b) {
+                                return a + '<span class="help-block has-error error-msg">{0}</span>'.format(b);
+                            }, '');
+                            helpTextEl = angular.element('<div>' + html + '</div>');
+                        } else {
+                            helpTextEl = angular.element('<span class="help-block has-error error-msg">' + errorMsg + '</span>');
+                        }
                         if (frmGroupEl) {
                             reset(frmGroupEl);
                             inputGroupEl = findInputGroupElement(frmGroupEl[0]);
@@ -687,6 +694,10 @@
                             messageTypeOverride = getMessageTypeOverride(errorType, el);
                             if (messageTypeOverride) {
                                 errMsg = angular.autoValidate.errorMessages[currentCulture][messageTypeOverride];
+                            }
+
+                            if (errorType === 'api') {
+                                errMsg = el.scope().errors[el.attr('name')];
                             }
 
                             if (errMsg === undefined) {

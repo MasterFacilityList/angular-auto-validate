@@ -133,10 +133,10 @@
                             helpTextEl,
                             inputGroupEl;
                         if (angular.isArray(errorMsg)) {
-                            var html = _.reduce(errorMsg, function(a, b){
-                                return a+'<span class="help-block has-error error-msg">{0}</span>'.format(b);
+                            var html = _.reduce(errorMsg, function (a, b) {
+                                return a + '<span class="help-block has-error error-msg">{0}</span>'.format(b);
                             }, '');
-                            helpTextEl = angular.element('<div>'+html+'</div>');
+                            helpTextEl = angular.element('<div>' + html + '</div>');
                         } else {
                             helpTextEl = angular.element('<span class="help-block has-error error-msg">' + errorMsg + '</span>');
                         }
