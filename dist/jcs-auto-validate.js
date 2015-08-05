@@ -1235,11 +1235,7 @@
         $provide.decorator('ngSubmitDirective', SubmitDecorator);
     }
 
-    ProviderFn.$inject = [
-        '$provide'
-    ];
-
-    angular.module('jcs-autoValidate').config(ProviderFn);
+    angular.module('jcs-autoValidate').config(['$provide', ProviderFn]);
 }(angular));
 
 (function (angular) {
